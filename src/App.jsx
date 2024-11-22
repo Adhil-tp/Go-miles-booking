@@ -7,6 +7,9 @@ import colorLogo from "./assets/logos/logo-name-color.png"
 import { motion, useAnimation } from "framer-motion"
 
 function App() {
+  const deployURL = import.meta.env.VITE_API_URL
+  console.log(deployURL)
+
   const formData = {
     name: "adhi",
     planningDate: "",

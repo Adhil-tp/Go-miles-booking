@@ -7,7 +7,7 @@ import Options from "./Options"
 import { useUserData } from "../context/userDataContext"
 import AdminPhone from "../assets/constants/AdminPhone"
 import axios from "axios"
-import spreadSheetId, { deployid } from "../assets/constants/spreadSheetid"
+import spreadSheetId from "../assets/constants/spreadSheetid"
 import { ClipLoader } from "react-spinners"
 
 const Questions = ({
@@ -119,15 +119,16 @@ const Questions = ({
           formData.append(key, userData[key])
         }
       }
-      console.log("subited", deployid, "HEL")
 
       formData.append("enquiryDate", new Date().toLocaleDateString("en-GB"))
       formData.append("spreadSheetId", spreadSheetId)
 
       try {
-        const result = await axios.post(deployid, formData)
+        const result = await axios.post(
+          `${import.meta.env.VITE_API_URL}`,
+          formData
+        )
         alert("Form submitted successfully")
-        console.log("form details:", userData)
         setPage(0)
         setUserData({
           name: "",

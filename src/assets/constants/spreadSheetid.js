@@ -1,12 +1,7 @@
 const spreadSheetId = "1KVVwjxj-FWMYkaGmDnAx21Uk4KdbLdQdDS5wbbOr9JY"
 
-//fill your spread sheet id between the "" in the above line
-const deployid =
-  "https://script.google.com/macros/s/AKfycbwgJshW4ysK1UnCUhdfDxqTTeos3EMKfGsDH-X0KX5E-dCfBDuJWtS4fC8LEiZTqdpNBA/exec"
-
 export default spreadSheetId
 
-export { deployid }
 //-----
 
 //-----
