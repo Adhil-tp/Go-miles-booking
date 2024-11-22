@@ -6,7 +6,7 @@ const destinationPlaces = {
   Turkey: [
     {
       image:
-        "https://images.unsplash.com/photo-1518414922567-9da8c8461366?q=80&w=1856&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://images.unsplash.com/photo-1652102627171-0cc3c2c35916?q=80&w=1782&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       option: "Istanbul",
     },
     {

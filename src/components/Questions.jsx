@@ -7,7 +7,6 @@ import Options from "./Options"
 import { useUserData } from "../context/userDataContext"
 import AdminPhone from "../assets/constants/AdminPhone"
 import axios from "axios"
-import spreadSheetId from "../assets/constants/spreadSheetid"
 import { ClipLoader } from "react-spinners"
 
 const Questions = ({
@@ -121,7 +120,7 @@ const Questions = ({
       }
 
       formData.append("enquiryDate", new Date().toLocaleDateString("en-GB"))
-      formData.append("spreadSheetId", spreadSheetId)
+      formData.append("spreadSheetId", import.meta.env.VITE_API_SHEETID)
 
       try {
         const result = await axios.post(

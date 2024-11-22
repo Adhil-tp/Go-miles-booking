@@ -1,4 +1,4 @@
-const spreadSheetId = "1KVVwjxj-FWMYkaGmDnAx21Uk4KdbLdQdDS5wbbOr9JY"
+const spreadSheetId = ""
 
 export default spreadSheetId
 
