@@ -127,7 +127,6 @@ const Questions = ({
           `${import.meta.env.VITE_API_URL}`,
           formData
         )
-        alert("Form submitted successfully")
         setPage(0)
         setUserData({
           name: "",
@@ -148,10 +147,11 @@ const Questions = ({
           city: "",
           reference: "",
         })
-        window.location.reload()
       } catch (error) {
         console.log("Error:", error.message)
       } finally {
+        alert("Form submitted successfully")
+        window.location.reload()
         setIsLoading(false)
       }
       return
