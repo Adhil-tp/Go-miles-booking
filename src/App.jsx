@@ -8,12 +8,11 @@ import { motion, useAnimation } from "framer-motion"
 
 function App() {
   const deployURL = import.meta.env.VITE_API_URL
-  console.log(deployURL)
 
   const formData = {
     name: "adhi",
     planningDate: "",
-    planingDayCount: 0,
+    dayNightCount: "",
     joiners: "",
     joinersCount: 0,
     tourType: "",

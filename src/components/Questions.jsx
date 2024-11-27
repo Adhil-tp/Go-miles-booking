@@ -20,8 +20,8 @@ const Questions = ({
     selectOnlyOne,
     image,
     isSubmit,
-    getOptions, // Add this prop
-    dependsOn, // Add this prop
+    getOptions,
+    dependsOn,
   },
   question,
   page,
@@ -109,11 +109,16 @@ const Questions = ({
       // e.preventDefault()
       setIsLoading(true)
       const formData = new FormData()
+      console.log("user Data", userData)
 
       for (const key in userData) {
         if (key == "date") {
           console.log(key, userData[key])
           formData.append(key, userData[key].date)
+          formData.append(
+            "dayNightCount",
+            `${userData[key].days} days, ${userData[key].nights} nights`
+          )
         } else {
           formData.append(key, userData[key])
         }
@@ -131,7 +136,7 @@ const Questions = ({
         setUserData({
           name: "",
           date: "",
-          dayCount: "",
+          dayNightCount: "",
           companion: "",
           teamCount: "",
           tourType: "",
@@ -151,7 +156,7 @@ const Questions = ({
         console.log("Error:", error.message)
       } finally {
         alert("Form submitted successfully")
-        window.location.reload()
+        // window.location.reload()
         setIsLoading(false)
       }
       return
