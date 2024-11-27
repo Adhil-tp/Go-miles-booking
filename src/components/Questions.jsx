@@ -156,7 +156,7 @@ const Questions = ({
         console.log("Error:", error.message)
       } finally {
         alert("Form submitted successfully")
-        // window.location.reload()
+        window.location.reload()
         setIsLoading(false)
       }
       return
