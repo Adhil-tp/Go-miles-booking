@@ -34,6 +34,11 @@ const Questions = ({
   const [selectedOptions, setSelectedOptions] = useState({})
   const [isLoading, setIsLoading] = useState(false)
 
+  // State for counting members
+  const [adultCount, setAdultCount] = useState(0) // State for adult count
+  const [childCount, setChildCount] = useState(0) // State for child count
+  const [childAges, setChildAges] = useState([]) // State for children's ages
+
   // Function to get the correct options based on dependencies
   const getCurrentOptions = () => {
     if (question.name === "wishlist" && getOptions) {
@@ -106,23 +111,40 @@ const Questions = ({
     }
 
     if (isSubmit) {
-      // e.preventDefault()
       setIsLoading(true)
       const formData = new FormData()
       console.log("user Data", userData)
 
       for (const key in userData) {
-        if (key == "date") {
-          console.log(key, userData[key])
+        if (key === "date") {
           formData.append(key, userData[key].date)
           formData.append(
             "dayNightCount",
-            `${userData[key].days} days, ${userData[key].nights} nights`
+            `${userData[key].days || "N/A"} days, ${
+              userData[key].nights || "N/A"
+            } nights`
           )
         } else {
           formData.append(key, userData[key])
         }
       }
+      console.log(adultCount, childAges.toString(), childCount)
+
+      // Add adult and child counts to formData
+      const childAgesString = childAges.map((n) => `(${n})`)
+      console.log(
+        `${adultCount} adults`,
+        `${childCount} childs, ${childAgesString}`
+      )
+
+      formData.append("adultCount", `${adultCount} adults`)
+      formData.append(
+        "childCount",
+        `${childCount} childs, ${childAgesString.toString()}`
+      )
+      // childAges.forEach((age, index) => {
+      //   formData.append(`childAge_${index}`, age)
+      // })
 
       formData.append("enquiryDate", new Date().toLocaleDateString("en-GB"))
       formData.append("spreadSheetId", import.meta.env.VITE_API_SHEETID)
@@ -134,6 +156,12 @@ const Questions = ({
         )
         setPage(0)
         setUserData({
+          ...userData,
+          members: {
+            adultCount: adultCount,
+            childCount: childCount,
+            childAges: childAges,
+          },
           name: "",
           date: "",
           dayNightCount: "",
@@ -156,7 +184,7 @@ const Questions = ({
         console.log("Error:", error.message)
       } finally {
         alert("Form submitted successfully")
-        window.location.reload()
+        // window.location.reload()
         setIsLoading(false)
       }
       return
@@ -219,6 +247,16 @@ const Questions = ({
     })
   }
 
+  const handleAddChildAge = () => {
+    setChildAges((prev) => [...prev, ""]) // Add an empty string for a new age input
+  }
+
+  const handleChildAgeChange = (index, value) => {
+    const updatedAges = [...childAges]
+    updatedAges[index] = value // Update the specific child's age
+    setChildAges(updatedAges)
+  }
+
   if (shouldSkipQuestion()) {
     return null
   }
@@ -254,6 +292,51 @@ const Questions = ({
             <InputField question={question} />
             {error && errorFields.includes(question.name) && (
               <div className="text-red-400">This field is required</div>
+            )}
+          </div>
+        )}
+
+        {question.name === "members" && (
+          <div>
+            <h2>{title}</h2>
+            <div>
+              <label>Number of Adults:</label>
+              <input
+                type="number"
+                value={adultCount}
+                onChange={(e) => setAdultCount(e.target.value)}
+                min="0"
+                className="border-2 ml-8 mb-5 mt-8 p-2 rounded-lg"
+              />
+            </div>
+            <div>
+              <label>Number of Children:</label>
+              <input
+                type="number"
+                value={childCount}
+                onChange={(e) => setChildCount(e.target.value)}
+                min="0"
+                className="border-2 ml-8 mb-5 mt-8 p-2 rounded-lg"
+              />
+            </div>
+            {childCount > 0 && (
+              <div>
+                <h3>Children's Ages:</h3>
+                {Array.from({ length: childCount }).map((_, index) => (
+                  <div key={index}>
+                    <input
+                      type="number"
+                      placeholder="Child Age"
+                      value={childAges[index] || ""}
+                      onChange={(e) =>
+                        handleChildAgeChange(index, e.target.value)
+                      }
+                      className="border-2 ml-8 mb-5 mt-8 p-2 rounded-lg"
+                    />
+                  </div>
+                ))}
+                {/* <button onClick={handleAddChildAge}>Add Child Age</button> */}
+              </div>
             )}
           </div>
         )}

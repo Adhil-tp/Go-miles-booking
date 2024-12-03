@@ -11,7 +11,7 @@ export const UserDataProvider = ({ children }) => {
   const [userData, setUserData] = useState({
     name: "",
     date: "",
-    dayNightCount: "",
+    dayCount: "",
     companion: "",
     teamCount: "",
     tourType: "",

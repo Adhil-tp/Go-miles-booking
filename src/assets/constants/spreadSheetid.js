@@ -1,5 +1,7 @@
 const spreadSheetId = ""
 
+//fill your spread sheet id between the "" in the above line
+
 export default spreadSheetId
 
 //-----

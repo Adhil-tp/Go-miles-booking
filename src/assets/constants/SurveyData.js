@@ -266,6 +266,42 @@ Thank you for reaching out to Gomiles International! Whether you're dreaming of 
     buttonText: "OK",
   },
   {
+    name: "members",
+    title: "Please enter details about the members in your group.",
+    image: "https://images.unsplash.com/photo-1530268729831-4b0b9e170218?q=80&w=1856&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    isCount: true,
+    components: [
+      {
+        label: "Number of Adults",
+        type: "number", // Keep as number type for input
+        name: "adultCount",
+        min: 0, // Allow zero adults
+        required: true, // Optional: specify if this field is required
+        step: 1, // Step value for increase/decrease
+        inputType: "numberBox", // Custom type to indicate a number box with controls
+      },
+      {
+        label: "Number of Children",
+        type: "number", // Keep as number type for input
+        name: "childCount",
+        min: 0, // Allow zero children
+        required: true, // Optional: specify if this field is required
+        step: 1, // Step value for increase/decrease
+        inputType: "numberBox", // Custom type to indicate a number box with controls
+      },
+      {
+        label: "Children's Ages",
+        type: "ageInputs", // Custom type to dynamically generate input fields based on childCount
+        name: "childAges",
+        dependency: "childCount", // This field appears if childCount > 0
+        allowMultiple: true, // New property to allow adding multiple ages
+        addButtonText: "Add Child Age", // Button text to add more age inputs
+        ageInputLabel: "Child Age", // Label for each age input
+      }
+    ],
+    buttonText: "OK",
+  },
+  {
     name: "tourType",
     title: `Would you prefer a private or group tour?`,
     options: [
