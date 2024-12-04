@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react"
-import clockIcon from "../assets/icons/icons8-clock-48.png"
 import { motion, useAnimation } from "framer-motion"
 import DateInput from "./DateInput"
 import InputField from "./InputField"
 import Options from "./Options"
 import { useUserData } from "../context/userDataContext"
-import AdminPhone from "../assets/constants/AdminPhone"
 import axios from "axios"
 import { ClipLoader } from "react-spinners"
+import "./scrollbar.css"
 
 const Questions = ({
   question: {
@@ -267,13 +266,13 @@ const Questions = ({
   }
 
   return (
-    <div className="flex overflow-hidden flex-col max-md:h-full gap-5 w-full">
+    <div className="flex overflow-hidden flex-col max-md:h-full gap-5 w-full ">
       <motion.div
         key={page}
         initial={{ x: 30, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 1 }}
-        className={`h-full max-sm:max-h-[80%] max-sm:overflow-y-auto w-full flex ${
+        className={`h-full max-sm:max-h-[80%] max-sm:overflow-y-auto w-full   scroll-container flex ${
           image ? "items-start" : "justify-center"
         } flex-col`}
       >
@@ -297,7 +296,7 @@ const Questions = ({
         )}
 
         {question.name === "members" && (
-          <div>
+          <div className="">
             <h2>{title}</h2>
             <div>
               <label>Number of Adults:</label>
